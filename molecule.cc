@@ -30,11 +30,23 @@ void Molecule::rotate(double phi)
     }
 }
 
-double Molecule::bond(int atom1, int atom2)
+double Molecule::bond(int a, int b)
 {
-    return sqrt(pow((geom[atom1][0] - geom[atom2][0]), 2) +
-                pow((geom[atom1][1] - geom[atom2][1]), 2) +
-                pow((geom[atom1][2] - geom[atom2][2]), 2));
+    return sqrt(pow((geom[a][0] - geom[b][0]), 2) +
+                pow((geom[a][1] - geom[b][1]), 2) +
+                pow((geom[a][2] - geom[b][2]), 2));
+}
+
+double Molecule::unit(int cart, int a, int b)
+{
+    return -(geom[a][cart] - geom[b][cart])/bond(a,b);
+}
+
+double Molecule::angle(int a, int b, int c)
+{
+    return acos(unit(0,b,a) * unit(0,b,c) + 
+                unit(1,b,a) * unit(1,b,c) +
+                unit(2,b,a) * unit(2,b,c));
 }
 
 Molecule::Molecule(const char *filename, int q)

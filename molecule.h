@@ -17,6 +17,7 @@ class Molecule
         double bond(int atom1, int atom2);
         double angle(int atom1, int atom2, int atom3);
         double torsion(int atom1, int atom2, int atom3, int atom4);
+        double unit(int cart, int atom1, int atom2);
 
         Molecule(const char *filename, int q);
         ~Molecule();
